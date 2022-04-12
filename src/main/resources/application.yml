@@ -1,0 +1,29 @@
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  datasource:
+    username: ${DB_USER}
+    password: ${DB_PWD}
+    url: jdbc:mysql://localhost:3306/air_system?useSSL=false&allowPublicKeyRetrieval=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    #database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    open-in-view: false
+  servlet:
+    multipart:
+      max-file-size: 6MB
+      max-request-size: 40MB
+  jackson:
+  #default-property-inclusion: always
+server:
+  port: 8443
+  #address: 127.0.0.1    # Which address the application will be listening
+  forward-headers-strategy: framework
+  error:
+    include-message: always # Include exception messages on responses
+    include-stacktrace: never
+

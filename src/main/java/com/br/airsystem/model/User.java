@@ -26,10 +26,7 @@ public class User {
     @CPF
     private String cpf;
 
-    @Column(nullable = false)
-    private String street;
-
-    @Column(nullable = false)
-    private String district;
-
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id")
+    private Address address;
 }

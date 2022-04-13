@@ -21,8 +21,8 @@ public class CompanyService {
     private final String INVALID_COMPANY_NAME = "Nome da empresa inválido.";
     private final String COMPANY_NOT_FOUND = "Empresa inválida.";
 
-    private void validateCompany(CompanyDTO companyDTO) throws UnprocessableException {
-        if (StringUtils.isBlank(companyDTO.getName())) {
+    private void validateCompany(CompanyDTO companyDto) throws UnprocessableException {
+        if (StringUtils.isBlank(companyDto.getName())) {
             throw new UnprocessableException(INVALID_COMPANY_NAME);
         }
     }
@@ -48,5 +48,23 @@ public class CompanyService {
 
         return companyRepository.findById(id).map(c -> mapper.map(c, CompanyDTO.class))
                 .orElseThrow(() -> new NotFoundException(COMPANY_NOT_FOUND));
+    }
+
+    public void deleteCompany(Long id) throws NotFoundException {
+        Company company = companyRepository.findById(id).orElseThrow(() -> new NotFoundException(COMPANY_NOT_FOUND));
+        companyRepository.deleteById(company.getId());
+    }
+
+    public CompanyDTO update(Long id, CompanyDTO companyDto) throws NotFoundException, UnprocessableException {
+        ModelMapper mapper = new ModelMapper();
+        Company company = companyRepository.findById(id).orElseThrow(() -> new NotFoundException(COMPANY_NOT_FOUND));
+        validateCompany(companyDto);
+
+        company.setCnpj(companyDto.getCnpj());
+        company.setName(companyDto.getName());
+
+        Company updateComp = companyRepository.save(company);
+
+        return mapper.map(updateComp, CompanyDTO.class);
     }
 }

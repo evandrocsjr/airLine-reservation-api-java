@@ -37,4 +37,16 @@ public class CompanyController {
     public CompanyDTO getId(@PathVariable("id") Long id) throws NotFoundException {
         return companyService.findById(id);
     }
+
+    @PutMapping(value = "/{id}")
+    @ApiOperation("Atualiza uma Empresa através de seu id")
+    public CompanyDTO updateCompany(@PathVariable("id") Long id, @RequestBody CompanyDTO companyDto) throws UnprocessableException, NotFoundException {
+        return companyService.update(id, companyDto);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    @ApiOperation("Exclui uma Empresa através de seu id")
+    public void deleteCompany(@PathVariable("id") Long id) throws NotFoundException {
+        companyService.deleteCompany(id);
+    }
 }

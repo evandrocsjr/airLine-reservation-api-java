@@ -19,9 +19,17 @@ public class Ticket {
     private Long id;
 
     @Column
-    private String identifier;
+    private String classAirplane;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "travel_insurance_id")
+    private TravelInsurance travelInsurance;
+
+    @ManyToOne
+    @JoinColumn(name = "airplane_id")
+    private Airplane airplane;
 }

@@ -4,17 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.br.CPF;
-import org.springframework.validation.annotation.Validated;
+import org.hibernate.validator.constraints.br.CNPJ;
 
 import javax.persistence.*;
 
-@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class User {
+@Entity
+public class Company {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,14 +22,7 @@ public class User {
     @Column(nullable = false)
     private String name;
 
+    @CNPJ
     @Column(nullable = false)
-    @CPF
-    private String cpf;
-
-    @Column(nullable = false)
-    private String street;
-
-    @Column(nullable = false)
-    private String district;
-
+    private String cnpj;
 }

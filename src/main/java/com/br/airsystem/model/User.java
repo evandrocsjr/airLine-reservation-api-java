@@ -23,6 +23,12 @@ public class User {
     private String name;
 
     @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Column(nullable = false, unique = true)
     @CPF
     private String cpf;
 

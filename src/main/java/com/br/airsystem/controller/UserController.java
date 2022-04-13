@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @CrossOrigin
 @RequestMapping("/v1/users")
-public class UserController {
+public class UserController extends DefaultController{
 
     private final UserService userService;
 
     @PostMapping
     @ApiOperation(value = "Cria um novo usuário")
-    public UserDTO createUser(@RequestBody UserDTO user) throws UnprocessableException {
+    public UserDTO createUser(@RequestHeader("Authorization") String token, @RequestBody UserDTO user) throws UnprocessableException {
         return userService.createUser(user);
     }
 }

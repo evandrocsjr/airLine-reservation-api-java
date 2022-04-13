@@ -22,7 +22,7 @@ public class Company {
     @Column(nullable = false)
     private String name;
 
-    @CNPJ
-    @Column(nullable = false)
+    @CNPJ(message = "Número do registro de contribuinte corporativo brasileiro (CNPJ) inválido")
+    @Column(nullable = false, unique = true)
     private String cnpj;
 }

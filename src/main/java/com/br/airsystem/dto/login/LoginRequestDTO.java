@@ -1,4 +1,4 @@
-package com.br.airsystem.dto.user;
+package com.br.airsystem.dto.login;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,13 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserDTO {
-    private Long id;
-    private String name;
+public class LoginRequestDTO {
     private String email;
     private String password;
-    private boolean admin;
-    private String cpf;
-    private String street;
-    private String district;
 }

@@ -1,6 +1,7 @@
 package com.br.airsystem.controller;
 
 import com.br.airsystem.dto.company.CompanyDTO;
+import com.br.airsystem.exception.ForbiddenException;
 import com.br.airsystem.exception.NotFoundException;
 import com.br.airsystem.exception.UnprocessableException;
 import com.br.airsystem.service.CompanyService;
@@ -16,14 +17,15 @@ import java.util.List;
 @CrossOrigin
 @RequiredArgsConstructor
 @RequestMapping("/v1/companies")
-public class CompanyController {
+public class CompanyController extends DefaultController{
 
     private final CompanyService companyService;
 
     @PostMapping()
     @ApiOperation("Cadastra uma nova Empresa")
-    public CompanyDTO createCompany(@RequestBody CompanyDTO companyDTO) throws UnprocessableException {
-        return companyService.create(companyDTO);
+    public CompanyDTO createCompany(@RequestHeader("Authorization") String token, @RequestBody CompanyDTO companyDTO)
+            throws UnprocessableException, ForbiddenException {
+        return companyService.create(super.getLoggedUser(token), companyDTO);
     }
 
     @GetMapping

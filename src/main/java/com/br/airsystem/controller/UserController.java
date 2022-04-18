@@ -1,5 +1,6 @@
 package com.br.airsystem.controller;
 
+import com.br.airsystem.dto.user.CommonUserDTO;
 import com.br.airsystem.dto.user.UserDTO;
 import com.br.airsystem.exception.UnprocessableException;
 import com.br.airsystem.model.User;
@@ -20,7 +21,7 @@ public class UserController extends DefaultController{
 
     @PostMapping
     @ApiOperation(value = "Cria um novo usuário")
-    public UserDTO createUser(@RequestHeader("Authorization") String token, @RequestBody UserDTO user) throws UnprocessableException {
-        return userService.createUser(user);
+    public void createUser(@RequestBody CommonUserDTO user) throws UnprocessableException {
+        userService.createUser(user);
     }
 }

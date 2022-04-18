@@ -28,11 +28,16 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column
+    private boolean admin;
+
     @Column(nullable = false, unique = true)
     @CPF
     private String cpf;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id")
-    private Address address;
+    @Column
+    private String street;
+
+    @Column
+    private String district;
 }

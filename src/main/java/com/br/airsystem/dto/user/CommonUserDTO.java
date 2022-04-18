@@ -9,12 +9,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserDTO {
+public class CommonUserDTO {
     private Long id;
     private String name;
     private String email;
     private String password;
-    private boolean admin;
     private String cpf;
     private String street;
     private String district;

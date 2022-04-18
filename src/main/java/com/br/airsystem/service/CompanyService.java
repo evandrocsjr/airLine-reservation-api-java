@@ -1,9 +1,11 @@
 package com.br.airsystem.service;
 
 import com.br.airsystem.dto.company.CompanyDTO;
+import com.br.airsystem.exception.ForbiddenException;
 import com.br.airsystem.exception.NotFoundException;
 import com.br.airsystem.exception.UnprocessableException;
 import com.br.airsystem.model.Company;
+import com.br.airsystem.model.User;
 import com.br.airsystem.repository.CompanyRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -15,7 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class CompanyService {
+public class CompanyService extends DefaultService{
 
     private final CompanyRepository companyRepository;
     private final String INVALID_COMPANY_NAME = "Nome da empresa inválido.";
@@ -27,7 +29,8 @@ public class CompanyService {
         }
     }
 
-    public CompanyDTO create(CompanyDTO companyDTO) throws UnprocessableException {
+    public CompanyDTO create(User loggedUser, CompanyDTO companyDTO) throws UnprocessableException, ForbiddenException {
+        super.checkPermission(loggedUser);
         validateCompany(companyDTO);
 
         ModelMapper mapper = new ModelMapper();
